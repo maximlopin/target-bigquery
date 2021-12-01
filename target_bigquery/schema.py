@@ -330,7 +330,8 @@ def format_record_to_schema(record, bq_schema):
                        "BOOLEAN": bool,
                        "GEOGRAPHY": str,
                        "DECIMAL": str,
-                       "BIGDECIMAL": str
+                       "BIGDECIMAL": str,
+                       "RECORD": str
                        }
 
     if isinstance(record, list):
@@ -361,14 +362,19 @@ def format_record_to_schema(record, bq_schema):
                 except Exception:
                     print('-' * 5)
                     print(record)
+                    # {'github': {'githubId': '1230091', 'accessToken': 'ghu_ZBiQn0EyEnsFlV0JHBFbVPnGTCf3T53mKLas', 'refreshToken': 'ghr_NVDhbNmIxPeZI3d7fHMXIyOz7sTjBgJWEID2KFJnfwMNGCO5JcENgf1jaiOY1U7FqVoZyV1C2Ez0', 'accessTokenExpire': 1617941505363, 'refreshTokenExpire': 1633723905363}, 'github_access_token': '9f6e0c0d12902ceddc84c6ed252b5ab4b787e990', 'github_id': '1230091', 'id': 1560, 'is_owner': True, 'state': 'f0c6dfda93d1233dd49d513197ae59ef9b7cf41088b546e4eb7b7008cc8d7a20', 'tenant_id': 189, 'user_id': 1537}
                     print('-' * 5)
                     print(conversion_dict)
+                    # {'BYTES': <class 'bytes'>, 'STRING': <class 'str'>, 'TIME': <class 'str'>, 'TIMESTAMP': <class 'str'>, 'DATE': <class 'str'>, 'DATETIME': <class 'str'>, 'FLOAT': <class 'float'>, 'NUMERIC': <class 'float'>, 'BIGNUMERIC': <class 'float'>, 'INTEGER': <class 'int'>, 'BOOLEAN': <class 'bool'>, 'GEOGRAPHY': <class 'str'>, 'DECIMAL': <class 'str'>, 'BIGDECIMAL': <class 'str'>}
                     print('-' * 5)
                     print(bq_schema)
+                    # {'id': {'type': 'INTEGER', 'mode': 'REQUIRED', 'policyTags': {'names': []}}, 'user_id': {'type': 'INTEGER', 'mode': 'NULLABLE', 'policyTags': {'names': []}}, 'tenant_id': {'type': 'INTEGER', 'mode': 'NULLABLE', 'policyTags': {'names': []}}, 'is_owner': {'type': 'BOOLEAN', 'mode': 'NULLABLE', 'policyTags': {'names': []}}, 'github_access_token': {'type': 'STRING', 'mode': 'NULLABLE', 'policyTags': {'names': []}}, 'github_id': {'type': 'STRING', 'mode': 'NULLABLE', 'policyTags': {'names': []}}, 'state': {'type': 'STRING', 'mode': 'NULLABLE', 'policyTags': {'names': []}}, 'github': {'type': 'RECORD', 'mode': 'NULLABLE', 'fields': []}}
                     print('-' * 5)
                     print(k)
+                    # github
                     print('-' * 5)
                     print(v)
+                    # {'githubId': '1230091', 'accessToken': 'ghu_ZBiQn0EyEnsFlV0JHBFbVPnGTCf3T53mKLas', 'refreshToken': 'ghr_NVDhbNmIxPeZI3d7fHMXIyOz7sTjBgJWEID2KFJnfwMNGCO5JcENgf1jaiOY1U7FqVoZyV1C2Ez0', 'accessTokenExpire': 1617941505363, 'refreshTokenExpire': 1633723905363}
                     print('-' * 5)
                     raise
     return record
