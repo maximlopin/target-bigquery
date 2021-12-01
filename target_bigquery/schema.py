@@ -356,5 +356,9 @@ def format_record_to_schema(record, bq_schema):
                 # mode: REPEATED, type: [any]
                 record[k] = [conversion_dict[bq_schema[k]["type"]](vi) for vi in v]
             else:
-                record[k] = conversion_dict[bq_schema[k]["type"]](v)
+                print("abc")
+                try:
+                    record[k] = conversion_dict[bq_schema[k]["type"]](v)
+                except Exception as e:
+                    raise Exception(f'{e}\n{record}\n{conversion_dict}\n{bq_schema}')
     return record
